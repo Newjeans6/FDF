@@ -18,7 +18,8 @@
 
 
 #define MLX_ERROR 1
-#define ESC 27
+#define ESC_KEY 27
+#define DESTROY 17  
 
 typedef struct s_data
 {
