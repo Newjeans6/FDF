@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/02 16:36:55 by pnaessen         ###   ########lyon.fr   */
+/*   Created: 2024/11/06 12:13:58 by pnaessen          #+#    #+#             */
+/*   Updated: 2024/11/15 14:09:57 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef fdf_h
-# define fdf_h
+#include "libft.h"
 
-#include "minilibx-linux/mlx.h"
-#include <stddef.h>
-
-
-#define MLX_ERROR 1
-#define ESC 27
-
-typedef struct s_data
+char	*ft_strrchr(const char *s, int c)
 {
-    void    *mlx_ptr;
-    void    *win_ptr;
-} t_data;
+	int	i;
 
-#endif
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	while (i >= 0)
+	{
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i--;
+	}
+	return (NULL);
+}

@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/02 16:36:55 by pnaessen         ###   ########lyon.fr   */
+/*   Created: 2024/11/10 23:12:14 by aviscogl          #+#    #+#             */
+/*   Updated: 2024/11/14 08:31:40 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef fdf_h
-# define fdf_h
+#include "libft.h"
 
-#include "minilibx-linux/mlx.h"
-#include <stddef.h>
-
-
-#define MLX_ERROR 1
-#define ESC 27
-
-typedef struct s_data
+void	ft_putnbr_fd(int n, int fd)
 {
-    void    *mlx_ptr;
-    void    *win_ptr;
-} t_data;
-
-#endif
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n = -n;
+	}
+	if (n >= 10)
+		ft_putnbr_fd(n / 10, fd);
+	write(fd, &"0123456789"[n % 10], 1);
+}

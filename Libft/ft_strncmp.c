@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/02 16:36:55 by pnaessen         ###   ########lyon.fr   */
+/*   Created: 2024/11/06 12:26:17 by pnaessen          #+#    #+#             */
+/*   Updated: 2024/11/15 14:08:49 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef fdf_h
-# define fdf_h
+#include "libft.h"
 
-#include "minilibx-linux/mlx.h"
-#include <stddef.h>
-
-
-#define MLX_ERROR 1
-#define ESC 27
-
-typedef struct s_data
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-    void    *mlx_ptr;
-    void    *win_ptr;
-} t_data;
+	size_t			i;
+	unsigned char	*t1;
+	unsigned char	*t2;
 
-#endif
+	t1 = (unsigned char *)s1;
+	t2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (t1[i] != t2[i])
+			return (t1[i] - t2[i]);
+		if (t1[i] == '\0')
+			return (0);
+		i++;
+	}
+	return (0);
+}

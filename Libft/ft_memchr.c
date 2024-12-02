@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/02 16:36:55 by pnaessen         ###   ########lyon.fr   */
+/*   Created: 2024/11/07 07:43:55 by pnaessen          #+#    #+#             */
+/*   Updated: 2024/11/15 14:10:32 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef fdf_h
-# define fdf_h
+#include "libft.h"
 
-#include "minilibx-linux/mlx.h"
-#include <stddef.h>
-
-
-#define MLX_ERROR 1
-#define ESC 27
-
-typedef struct s_data
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-    void    *mlx_ptr;
-    void    *win_ptr;
-} t_data;
+	const unsigned char	*ptr;
+	size_t				i;
 
-#endif
+	ptr = (const unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (ptr[i] == (unsigned char)c)
+			return ((void *)(ptr + i));
+		i++;
+	}
+	return (NULL);
+}

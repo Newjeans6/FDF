@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/02 16:36:55 by pnaessen         ###   ########lyon.fr   */
+/*   Created: 2024/11/07 08:06:49 by pnaessen          #+#    #+#             */
+/*   Updated: 2024/11/15 14:10:25 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef fdf_h
-# define fdf_h
+#include "libft.h"
 
-#include "minilibx-linux/mlx.h"
-#include <stddef.h>
-
-
-#define MLX_ERROR 1
-#define ESC 27
-
-typedef struct s_data
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-    void    *mlx_ptr;
-    void    *win_ptr;
-} t_data;
+	const unsigned char	*p1;
+	const unsigned char	*p2;
+	size_t				i;
 
-#endif
+	p1 = (const unsigned char *)s1;
+	p2 = (const unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (p1[i] != p2[i])
+			return (p1[i] - p2[i]);
+		i++;
+	}
+	return (0);
+}
