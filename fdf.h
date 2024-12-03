@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/03 16:03:10 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/03 16:11:22 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_data
 typedef struct img_s
 {
 	void	*img;
-	char	*./pnaessen.xpm;
+	char	*img_path;
 	int		img_width;
 	int		img_height;
 }			img_t;

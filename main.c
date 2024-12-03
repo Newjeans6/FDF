@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:30:13 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/03 16:03:24 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/03 16:11:29 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(void)
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 1080, 920, "First window !");
 	if (data.win_ptr == NULL)
 		return (MLX_ERROR);
-	img.img = mlx_xpm_file_to_image(data.mlx_ptr, img.relative_path, &img.img_width,
+	img.img = mlx_xpm_file_to_image(data.mlx_ptr, img.img_path, &img.img_width,
 			&img.img_height);
 	data.img_ptr = mlx_new_image(data.mlx_ptr, 1080, 920);
 	data.addr_ptr = mlx_get_data_addr(data.img_ptr, &data.bits_per_pixel,
