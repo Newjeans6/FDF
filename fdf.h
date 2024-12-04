@@ -34,4 +34,15 @@ typedef struct s_data
 	int		img_height;
 }			t_data;
 
+typedef struct s_map {
+    int **grid;
+    int width;      
+    int height;
+} t_map;
+
+typedef struct s_point {
+    int x;
+    int y;
+} t_point;
+
 #endif
