@@ -6,11 +6,11 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:30:13 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/04 12:48:01 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/06 12:25:11 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
 int	key_hook(int keycode, t_data *data)
 {
@@ -52,6 +52,9 @@ int main(int argc, char **argv)
     data.win_ptr = mlx_new_window(data.mlx_ptr, 1920, 1080, "FdF");
     if (data.win_ptr == NULL)
         return (MLX_ERROR);
+    data.img_path = "pnaessen.xpm";
+    data.img = mlx_xpm_to_image(data.mlx_ptr, data.img_path, data.img , data.img_height);
+    mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
     draw_map(&data, map);
     mlx_key_hook(data.win_ptr, key_hook, &data);
     mlx_hook(data.win_ptr, DESTROY, 0, close_window, &data);

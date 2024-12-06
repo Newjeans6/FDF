@@ -6,11 +6,11 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:47:55 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/11/27 13:26:02 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/06 09:05:06 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../include/get_next_line.h"
 
 void	ft_bzero(void *s, size_t n)
 {

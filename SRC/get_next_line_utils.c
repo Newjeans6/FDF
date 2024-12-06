@@ -6,11 +6,11 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:06:57 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/11/27 13:27:55 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/06 09:04:55 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../include/get_next_line.h"
 
 char	*ft_strdup(const char *s)
 {

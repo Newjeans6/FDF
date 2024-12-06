@@ -6,7 +6,7 @@
 #    By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:42:01 by pnaessen          #+#    #+#              #
-#    Updated: 2024/12/02 11:17:09 by pnaessen         ###   ########lyon.fr    #
+#    Updated: 2024/12/06 11:03:20 by pnaessen         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC:= gcc
 
 CCFLAGS:= -Werror -Wextra -Wall
 
-SRC:= main.c
+SRC:= main.c tools.c algo.c ft_atoi.c ft_split.c
 
 OBJ:= $(SRC:%.c=%.o)
 
@@ -25,9 +25,11 @@ all: $(NAME)
 MLX_DIR:= minilibx-linux/
 MLX:= minilibx-linux/libmlx_Linux.a
 MLX_FLAG:= -L $(MLX_DIR) -lmlx_Linux -L/usr/lib -I $(MLX_DIR) -lX11 -lm -lz -lXext $(MLX)
+GNL_DIR:= SRC/
 
 $(NAME): $(OBJ)
 	make -C $(MLX_DIR)
+	make -C $(GNL_DIR)
 	$(CC) $(CCFLAGS) $(OBJ) $(MLX_FLAG) -o $(NAME)
 
 print:
