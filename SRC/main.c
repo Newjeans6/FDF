@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:30:13 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/06 12:25:11 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/07 14:58:54 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	key_hook(int keycode, t_data *data)
 		free(data->mlx_ptr);
 		exit(0);
 	}
-	printf("Key code : %d\n", keycode);
 	return (0);
 }
 
@@ -36,30 +35,42 @@ int	close_window(t_data *data)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_data data;
-    t_map *map;
+	t_data	data;
+	t_map	*map;
 
-    if (argc != 2)
-        return (NULL);
-    map = read_map(argv[1]);
-    if (!map)
-        return (NULL);
-    data.mlx_ptr = mlx_init();
-    if (data.mlx_ptr == NULL)
-        return (free(data.mlx_ptr), MLX_ERROR);
-    data.win_ptr = mlx_new_window(data.mlx_ptr, 1920, 1080, "FdF");
-    if (data.win_ptr == NULL)
-        return (MLX_ERROR);
-    data.img_path = "pnaessen.xpm";
-    data.img = mlx_xpm_to_image(data.mlx_ptr, data.img_path, data.img , data.img_height);
-    mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
-    draw_map(&data, map);
-    mlx_key_hook(data.win_ptr, key_hook, &data);
-    mlx_hook(data.win_ptr, DESTROY, 0, close_window, &data);
-    mlx_loop(data.mlx_ptr);
-    free_map(map);
-    free(data.mlx_ptr);
-    return (0);
+	if (argc != 2)
+	{
+		printf("Usage: %s <map_file>\n", argv[0]);
+		return (1);
+	}
+	map = read_map(argv[1]);
+	if (!map)
+	{
+		printf("Failed to read map.\n");
+		return (1);
+	}
+	// printf("Map dimensions: %d x %d\n", map->width, map->height);
+	// for (int y = 0; y < map->height; y++)
+	// {
+	//     for (int x = 0; x < map->width; x++)
+	//     {
+	//         printf("%2d ", map->grid[y][x]);
+	//     }
+	//     printf("\n");
+	// }
+	// for (int y = 0; y < map->height; y++)
+	// {
+	//     free(map->grid[y]);
+	// }
+	// free(map->grid);
+	// free(map);
+	data.mlx_ptr = mlx_init();
+	data.win_ptr = mlx_new_window(data.mlx_ptr, 800, 800, "FDF");
+	draw_map(&data, map);
+	mlx_key_hook(data.win_ptr, key_hook, &data);
+	mlx_hook(data.win_ptr, DESTROY, 0, close_window, &data);
+	mlx_loop(data.mlx_ptr);
+	return (0);
 }

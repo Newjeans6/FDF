@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/06 09:26:37 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/07 15:37:11 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../minilibx-linux/mlx.h"
 //# include <./X11/Keysym.h>
-# include "get_next_line.h"
+# include "../Libft/libft.h"
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -35,7 +35,7 @@ typedef struct s_data // img + Window + ptr
 	int img_height;
 }		t_data;
 
-typedef struct s_map // Map 2d stoker
+typedef struct s_map //  Matrice de projection
 {
 	int **grid;
 	int width;
@@ -48,14 +48,27 @@ typedef struct s_point // iso
 	int y;
 }		t_point;
 
+typedef struct s_line
+{
+	int	dx;
+	int	dy;
+	int	x;
+	int	y;
+	int	err;
+	int	sx;
+	int	sy;
+}		t_line;
+
 int		close_window(t_data *data);
 t_map	*read_map(const char *maps);
 int		*parse_line(char *line, int *width);
 void	draw_map(t_data *data, t_map *map);
 t_point	project_iso(int x, int y, int z);
 int		key_hook(int keycode, t_data *data);
-int	ft_atoi(const char *nptr);
+int		ft_atoi(const char *nptr);
 char	**ft_split(char const *s, char c);
-void free_split(char **split);
+void	free_split(char **split);
+int		draw_line(t_data *data, t_point p1, t_point p2);
+int		abs(int n);
 
 #endif
