@@ -6,13 +6,13 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:06:35 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/12/07 15:50:41 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/07 16:32:33 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int abs(int n)
+int	my_abs(int n)
 {
 	if (n < 0)
 		return (-n);
@@ -53,11 +53,11 @@ int	draw_line(t_data *data, t_point p1, t_point p2)
 {
 	t_line	line;
 
-	line.dx = abs(p2.x - p1.x);//distance horizontale
-	line.dy = abs(p2.y - p1.y);
-	line.x = p1.x;	//positions de départ
+	line.dx = my_abs(p2.x - p1.x); // distance horizontale
+	line.dy = my_abs(p2.y - p1.y);
+	line.x = p1.x; // positions de départ
 	line.y = p1.y;
-	line.err = line.dx - line.dy; 	// Calcul de l'erreur
+	line.err = line.dx - line.dy; // Calcul de l'erreur
 	if (p1.x < p2.x)
 		line.sx = 1; // Incrémenter x vers la droite
 	else
@@ -66,20 +66,24 @@ int	draw_line(t_data *data, t_point p1, t_point p2)
 		line.sy = 1; // Incrémenter y vers le bas
 	else
 		line.sy = -1; //  y vers le haut
-	while (line.x != p2.x || line.y != p2.y)
+	while (line.x != p2.x || line.y != p2.y) // boucle bug
 	{
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, line.x, line.y, 0xFFFFFF);
-		line.err += line.dy;
-		if (2 * line.err >= line.dx)
+		int e2;
+		e2 = 2 * line.err;
+		if (e2 >= line.dx)
 		{
+			printf("e2 dx %d\n", e2);
 			line.y += line.sy;
 			line.err -= line.dx;
 		}
-		if (2 * line.err <= line.dy)
+		if (e2 <= line.dy)
 		{
+			printf("e2 dy %d\n", e2);
 			line.x += line.sx;
 			line.err -= line.dy;
 		}
 	}
+	mlx_pixel_put(data->mlx_ptr, data->win_ptr, p2.x, p2.y, 0xFFFFFF);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:30:13 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/07 14:58:54 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/07 16:23:07 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ int	main(int argc, char **argv)
 	mlx_key_hook(data.win_ptr, key_hook, &data);
 	mlx_hook(data.win_ptr, DESTROY, 0, close_window, &data);
 	mlx_loop(data.mlx_ptr);
+    free(map);
 	return (0);
 }

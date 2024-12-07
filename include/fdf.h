@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/07 15:37:11 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/07 16:01:33 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ int		ft_atoi(const char *nptr);
 char	**ft_split(char const *s, char c);
 void	free_split(char **split);
 int		draw_line(t_data *data, t_point p1, t_point p2);
-int		abs(int n);
+int		my_abs(int n);
 
 #endif

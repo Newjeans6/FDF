@@ -16,7 +16,7 @@ endif
 OBJDIR = .obj
 OBJS = $(addprefix $(OBJDIR)/,$(SRCS:.c=.o))
 
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = -Werror -Wextra -Wall -fPIE
 AR = ar -rcs
 
 $(OBJDIR)/%.o: %.c libft.h
