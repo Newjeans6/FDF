@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/07 16:01:33 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/08 13:23:37 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../minilibx-linux/mlx.h"
 //# include <./X11/Keysym.h>
 # include "../Libft/libft.h"
+# include <math.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -59,11 +60,17 @@ typedef struct s_line
 	int	sy;
 }		t_line;
 
+typedef struct s_window
+{
+	int	width;
+	int	height;
+}		t_window;
+
 int		close_window(t_data *data);
 t_map	*read_map(const char *maps);
 int		*parse_line(char *line, int *width);
-void	draw_map(t_data *data, t_map *map);
-t_point	project_iso(int x, int y, int z);
+void	draw_map(t_data *data, t_map *map, t_window *window);
+t_point	project_iso(int x, int y, int z, t_map *map, t_window *window);
 int		key_hook(int keycode, t_data *data);
 int		ft_atoi(const char *nptr);
 char	**ft_split(char const *s, char c);

@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:47:55 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/12/07 13:04:11 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/08 11:55:07 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	ft_update(char *str)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	str[BUFFER_SIZE + 1] = {0};
+	static char	str[BUFFER_SIZE + 1];
 	int			index;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)

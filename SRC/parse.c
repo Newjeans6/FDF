@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 21:26:34 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/12/07 15:33:04 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/08 12:33:57 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,4 @@ t_map	*read_map(const char *maps) // grid tableau 2D dynamique
 	return (map);
 }
 
-t_point	project_iso(int x, int y, int z)
-{
-	t_point	point;
 
-	point.x = (x - y) * 0.866;   //(cos)
-	point.y = (x + y) * 0.5 - z; // z = profondeur (sinus)
-	return (point);
-}
