@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dots.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdomet-d <cdomet-d@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:42:14 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/10 12:09:54 by cdomet-d         ###   ########lyon.fr   */
+/*   Updated: 2024/12/11 08:33:33 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_point	project_iso(int x, int y, int z, t_map *map, t_window *window)
 	p.y = (x + y) * sin(0.523599) * scale - z * 0.2 * scale; // pour pronfondeur
 	p.x += window->width / 2.2; // de gauche a droite
 	p.y += window->height / 2.8; // de bas em haut
+	p.color = calculate_color(z, map->min_z, map->max_z);
 	return (p);
 }
 
