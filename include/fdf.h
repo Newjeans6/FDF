@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/08 13:23:37 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/09 14:11:37 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 
 # include "../minilibx-linux/mlx.h"
-//# include <./X11/Keysym.h>
+//# include <../minilibx-linux/X11/keysym.h>
 # include "../Libft/libft.h"
 # include <math.h>
 # include <stddef.h>
@@ -41,29 +41,32 @@ typedef struct s_map //  Matrice de projection
 	int **grid;
 	int width;
 	int height;
+	int min_z;
+	int max_z;
 }		t_map;
 
-typedef struct s_point // iso
+typedef struct s_point // vue iso
 {
 	int x;
 	int y;
+	int color;
 }		t_point;
 
-typedef struct s_line
+typedef struct s_line // Bresenham
 {
-	int	dx;
-	int	dy;
-	int	x;
-	int	y;
-	int	err;
-	int	sx;
-	int	sy;
+	int dx;
+	int dy;
+	int x;
+	int y;
+	int err;
+	int sx;
+	int sy;
 }		t_line;
 
-typedef struct s_window
+typedef struct s_window // taille fenetre
 {
-	int	width;
-	int	height;
+	int width;
+	int height;
 }		t_window;
 
 int		close_window(t_data *data);
@@ -76,6 +79,11 @@ int		ft_atoi(const char *nptr);
 char	**ft_split(char const *s, char c);
 void	free_split(char **split);
 int		draw_line(t_data *data, t_point p1, t_point p2);
-int		my_abs(int n);
+void	change_color(int z, t_data *data, int x, int y);
+int		calculate_color(int z, int min_z, int max_z);
+void	init_line(t_line *line, t_point p1, t_point p2);
+int		update_line_position(t_line *line);
+float	calculate_progress(int start, int end, int current);
+int		draw_line(t_data *data, t_point p1, t_point p2);
 
 #endif
