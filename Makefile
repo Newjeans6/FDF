@@ -3,19 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: cdomet-d <cdomet-d@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:42:01 by pnaessen          #+#    #+#              #
-#    Updated: 2024/12/09 14:05:34 by pnaessen         ###   ########lyon.fr    #
+#    Updated: 2024/12/10 12:12:01 by cdomet-d         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := FDF
 
-CC := cc
+CC := gcc
 CCFLAGS := -Wextra -Wall -Werror 
-
 SRC_DIR := SRC/
+INCLUDES:= include/
 SRC := $(addprefix $(SRC_DIR), main.c parse.c algo.c dots.c)
 
 OBJ_DIR := .obj/
@@ -27,7 +27,9 @@ MLX_FLAG := -L $(MLX_DIR) -lmlx_Linux -L/usr/lib -I $(MLX_DIR) -lX11 -lm -lz -lX
 
 LIBFT_DIR := Libft/
 LIBFT := $(LIBFT_DIR)libft.a 
-LIBFT_FLAG := -L$(LIBFT_DIR) $(LIBFT)
+LIBFT_FLAG := -L $(LIBFT_DIR) $(LIBFT)
+
+HEADERS:= -I $(INCLUDES) -I $(MLX_DIR) -I $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
 	$(MAKE) -C $(MLX_DIR)
@@ -38,7 +40,7 @@ all: $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CCFLAGS) -I . -I $(MLX_DIR) -I $(SRC_DIR) -c $< -o $@
+	$(CC) $(CCFLAGS) $(HEADERS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)
