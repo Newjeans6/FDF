@@ -6,16 +6,16 @@
 #    By: cdomet-d <cdomet-d@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:42:01 by pnaessen          #+#    #+#              #
-#    Updated: 2024/12/10 11:58:31 by cdomet-d         ###   ########lyon.fr    #
+#    Updated: 2024/12/10 12:12:01 by cdomet-d         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := FDF
 
-CC := cc
+CC := gcc
 CCFLAGS := -Wextra -Wall -Werror 
-
 SRC_DIR := SRC/
+INCLUDES:= include/
 SRC := $(addprefix $(SRC_DIR), main.c parse.c algo.c dots.c)
 
 OBJ_DIR := .obj/
@@ -29,7 +29,7 @@ LIBFT_DIR := Libft/
 LIBFT := $(LIBFT_DIR)libft.a 
 LIBFT_FLAG := -L $(LIBFT_DIR) $(LIBFT)
 
-HEADERS:= -I . -I $(MLX_DIR) -I $(LIBFT_DIR)
+HEADERS:= -I $(INCLUDES) -I $(MLX_DIR) -I $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
 	$(MAKE) -C $(MLX_DIR)

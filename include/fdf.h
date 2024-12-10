@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdomet-d <cdomet-d@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/09 14:11:37 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/10 12:09:27 by cdomet-d         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../minilibx-linux/mlx.h"
+# include "mlx.h"
 //# include <../minilibx-linux/X11/keysym.h>
-# include "../Libft/libft.h"
+# include "libft.h"
 # include <math.h>
 # include <stddef.h>
 # include <stdio.h>

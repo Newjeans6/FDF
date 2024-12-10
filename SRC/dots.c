@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   dots.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: cdomet-d <cdomet-d@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:42:14 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/09 14:11:29 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/10 12:09:54 by cdomet-d         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "fdf.h"
 
 float	calculate_scale(t_map *map, int width, int height)
 {
