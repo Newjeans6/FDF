@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:42:14 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/11 08:33:33 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/11 08:33:56 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ float	calculate_scale(t_map *map, int width, int height)
 	float	scale_y;
 
 	map_width = (map->width + map->height) * cos(0.523599);
-	map_height = (map->width + map->height) * sin(0.523599) / 7;
+	map_height = (map->width + map->height) * sin(0.523599) / 2;
 	scale_x = width / map_width;
 	scale_y = height / map_height;
 	return ((fmin(scale_x, scale_y) * 0.7)); // reduire = dezoom

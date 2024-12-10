@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cdomet-d <cdomet-d@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:42:01 by pnaessen          #+#    #+#              #
-#    Updated: 2024/12/10 12:12:01 by cdomet-d         ###   ########lyon.fr    #
+#    Updated: 2024/12/11 08:33:50 by pnaessen         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 

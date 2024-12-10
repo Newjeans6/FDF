@@ -18,6 +18,7 @@ OBJS = $(addprefix $(OBJDIR)/,$(SRCS:.c=.o))
 
 CC:= gcc
 CFLAGS = -Werror -Wextra -Wall 
+# -fPIE
 AR = ar -rcs
 
 $(OBJDIR)/%.o: %.c libft.h
