@@ -16,6 +16,7 @@ endif
 OBJDIR = .obj
 OBJS = $(addprefix $(OBJDIR)/,$(SRCS:.c=.o))
 
+CC:= gcc
 CFLAGS = -Werror -Wextra -Wall 
 AR = ar -rcs
 
