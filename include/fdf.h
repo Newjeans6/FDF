@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/11 13:57:57 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/11 14:23:55 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ typedef struct s_data // img + Window + ptr
 {
 	void *mlx_ptr;
 	void *win_ptr;
-	// void *img;
-	// char *img_path;
-	// int img_width;
-	// int img_height;
+	void *img;
+	char *addr;
+	int bits_per_pixel;
+	int line_length;
+	int endian;
 }		t_data;
 
 typedef struct s_map //  Matrice de projection
