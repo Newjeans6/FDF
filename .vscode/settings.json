@@ -1,7 +1,8 @@
 {
-    "files.associations": {
+	"files.associations": {
 		"mlx.h": "c",
 		"fdf.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"cmath": "cpp"
 	}
 }

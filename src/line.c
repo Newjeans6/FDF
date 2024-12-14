@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 21:26:34 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/12/14 14:21:10 by pnaessen         ###   ########lyon.fr   */
+/*   Created: 2024/12/12 17:19:00 by pnaessen          #+#    #+#             */
+/*   Updated: 2024/12/13 15:08:01 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Libft/libft.h"
 #include "fdf.h"
-#include <fcntl.h>
-#include <unistd.h>
 
-void	free_split(char **split)
+void	draw_map_line(t_data *data, t_map *map, int x, int y, float scale)
 {
-	int	i;
+	t_point	p1;
+	t_point	p2;
 
-	i = 0;
-	while (split[i])
+	p1 = project_iso(x, y, map->grid[y][x], scale);
+	p1.color = calculate_color(map->grid[y][x], map->min_z, map->max_z);
+	if (x < map->width - 1)
 	{
-		free(split[i]);
-		i++;
+		p2 = project_iso(x + 1, y, map->grid[y][x + 1], scale);
+		p2.color = calculate_color(map->grid[y][x + 1], map->min_z, map->max_z);
+		draw_line(data, p1, p2);
 	}
-	free(split);
+	if (y < map->height - 1)
+	{
+		p2 = project_iso(x, y + 1, map->grid[y + 1][x], scale);
+		p2.color = calculate_color(map->grid[y + 1][x], map->min_z, map->max_z);
+		draw_line(data, p1, p2);
+	}
 }
 
-int	*parse_line(char *line, int *width)
+int	*parse_line_with_minmax(char *line, int *width, t_map *map)
 {
 	char	**split;
 	int		count;
@@ -45,24 +50,25 @@ int	*parse_line(char *line, int *width)
 	if (!row)
 		return (free_split(split), NULL);
 	*width = count;
-	i = 0;
-	while (i < count)
+	i = -1;
+	while (++i < count)
 	{
 		row[i] = ft_atoi(split[i]);
+		if (row[i] < map->min_z)
+			map->min_z = row[i];
+		if (row[i] > map->max_z)
+			map->max_z = row[i];
 		free(split[i]);
-		i++;
 	}
-	free(split);
-	return (row);
+	return (free(split), row);
 }
 
-void	grid_alloc(t_map *map, const char *maps, int height)
+void	grid_alloc_with_minmax(t_map *map, const char *maps, int height)
 {
 	char	*line;
 	int		fd;
 	int		y;
 
-	line = NULL;
 	map->grid = malloc(sizeof(int *) * height);
 	if (!map->grid)
 	{
@@ -73,39 +79,14 @@ void	grid_alloc(t_map *map, const char *maps, int height)
 	fd = open(maps, O_RDONLY);
 	if (fd < 0)
 		return ;
+	map->min_z = INT_MAX;
+	map->max_z = INT_MIN;
 	y = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		map->grid[y] = parse_line(line, &map->width);
+		map->grid[y] = parse_line_with_minmax(line, &map->width, map);
 		free(line);
 		y++;
 	}
 	close(fd);
-	return ;
-}
-
-t_map	*read_map(const char *maps)
-{
-	char	*line;
-	int		fd;
-	int		height;
-	t_map	*map;
-
-	fd = open(maps, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	map = malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);
-	height = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		height++;
-		free(line);
-	}
-	close(fd);
-	grid_alloc_with_minmax(map, maps, height);
-	if (!map->grid)
-		return (NULL);
-	return (map);
 }

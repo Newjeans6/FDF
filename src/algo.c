@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:40:33 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/11 14:07:52 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/14 14:12:47 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,95 +14,72 @@
 
 void	draw_map(t_data *data, t_map *map)
 {
-	int		x;
-	int		y;
-	t_point	p1;
-	t_point	p2;
+	int	x;
+	int	y;
 
+	if (data->flag == 1)
+	{
+		data->scale = calculate_scale(map, WinWidth, WinHeight);
+		data->flag = 0;
+	}
+	printf("scale = %f\n", data->scale);
 	y = 0;
 	while (y < map->height)
 	{
-		x = -1;
-		while (++x < map->width)
+		x = 0;
+		while (x < map->width)
 		{
-			p1 = project_iso(x, y, map->grid[y][x], map);
-			if (x < map->width - 1)
-			{
-				p2 = project_iso(x + 1, y, map->grid[y][x + 1], map);
-				draw_line(data, p1, p2);
-			}
-			if (y < map->height - 1)
-			{
-				p2 = project_iso(x, y + 1, map->grid[y + 1][x], map);
-				draw_line(data, p1, p2);
-			}
+			draw_map_line(data, map, x, y, data->scale);
+			x++;
 		}
 		y++;
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
 }
 
-void	init_line(t_line *line, t_point p1, t_point p2)
+void	initialize_line(t_line *line, t_point p1, t_point p2)
 {
-	line->dx = abs(p2.x - p1.x); // distance horizontale
+	line->dx = abs(p2.x - p1.x);
 	line->dy = abs(p2.y - p1.y);
-	line->x = p1.x; // positions de départ
-	line->y = p1.y;
-	if (p1.x < p2.x)  // si point final  à droite
-		line->sx = 1; // Incrémenter x vers la droite
-	else
-		line->sx = -1; //  x vers la gauche
-	if (p1.y < p2.y)   // si point final en bas
-		line->sy = 1;  // Incrémenter y vers le bas
-	else
-		line->sy = -1; //  y vers le haut
-	if (line->dx > line->dy)
-		// calcul de l'erreur si plus horizontal erreur basee sur dx
-		line->err = line->dx / 2;
-	else
-		line->err = -line->dy / 2;
+	line->sx = 1;
+	if (p1.x >= p2.x)
+		line->sx = -1;
+	line->sy = 1;
+	if (p1.y >= p2.y)
+		line->sy = -1;
+	line->err = line->dx;
+	if (line->dy > line->dx)
+		line->err = -line->dy;
+	line->err /= 2;
 }
 
-int	update_line_position(t_line *line, t_point p2)
+void	update_line_position(t_line *line, t_point *p1)
 {
-	int	e2;
-
-	e2 = line->err;
-	if (e2 > -line->dx)
+	if (line->err > -line->dx)
 	{
-		line->err -= line->dy; // ajuste l'erreur
-		line->x += line->sx;   // ajuste en horizontale
+		line->err -= line->dy;
+		p1->x += line->sx;
 	}
-	if (e2 < line->dy)
+	if (line->err < line->dy)
 	{
 		line->err += line->dx;
-		line->y += line->sy; // ajuste verticale
+		p1->y += line->sy;
 	}
-	return (line->x != p2.x || line->y != p2.y);
 }
 
-int	draw_line(t_data *data, t_point p1, t_point p2)
+void	draw_line(t_data *data, t_point p1, t_point p2)
 {
 	t_line	line;
-	int		progress;
-	int		color;
 
-	init_line(&line, p1, p2);
+	initialize_line(&line, p1, p2);
 	while (1)
 	{
-		if (line.x >= 0 && line.x < WinWidth && line.y >= 0
-			&& line.y < WinHeight) // verif si dans fenetre
-		{
-			if (line.dx > line.dy)
-				progress = calculate_progress(p1.x, p2.x, line.x);
-			else
-				progress = calculate_progress(p1.y, p2.y, line.y);
-			color = calculate_color(progress, p1.x, p2.x);
-			mlx_pixel_put(data->mlx_ptr, data->win_ptr, line.x, line.y, color);
-		}
-		if (!update_line_position(&line, p2))
-			break ;
+		put_pixel(data, p1.x, p1.y, p1.color);
+		if ((line.sx > 0 && p1.x >= p2.x) || (line.sx < 0 && p1.x <= p2.x))
+			if ((line.sy > 0 && p1.y >= p2.y) || (line.sy < 0 && p1.y <= p2.y))
+				break ;
+		update_line_position(&line, &p1);
 	}
-	return (0);
 }
 
 int	calculate_progress(int start, int end, int current)
