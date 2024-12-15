@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:19:00 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 13:32:34 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 16:49:23 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_map(t_data *data, t_map *map)
 		x = 0;
 		while (x < map->width)
 		{
-			draw_map_line(data, map, x, y, data->scale);
+			draw_map_line(data, map, x, y);
 			x++;
 		}
 		y++;
@@ -36,22 +36,22 @@ void	draw_map(t_data *data, t_map *map)
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
 }
 
-void	draw_map_line(t_data *data, t_map *map, int x, int y, float scale)
+void	draw_map_line(t_data *data, t_map *map, int x, int y)
 {
 	t_point	p1;
 	t_point	p2;
 
-	p1 = project_iso(x, y, map->grid[y][x], scale, data);
+	p1 = project_iso(x, y, map->grid[y][x], data);
 	p1.color = calculate_color(map->grid[y][x], map->min_z, map->max_z);
 	if (x < map->width - 1)
 	{
-		p2 = project_iso(x + 1, y, map->grid[y][x + 1], scale, data);
+		p2 = project_iso(x + 1, y, map->grid[y][x + 1], data);
 		p2.color = calculate_color(map->grid[y][x + 1], map->min_z, map->max_z);
 		draw_line(data, p1, p2);
 	}
 	if (y < map->height - 1)
 	{
-		p2 = project_iso(x, y + 1, map->grid[y + 1][x], scale, data);
+		p2 = project_iso(x, y + 1, map->grid[y + 1][x], data);
 		p2.color = calculate_color(map->grid[y + 1][x], map->min_z, map->max_z);
 		draw_line(data, p1, p2);
 	}

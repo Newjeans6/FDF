@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 14:33:23 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 16:48:49 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_line
 int					close_window(t_data *data);
 t_map				*read_map(const char *maps);
 void				draw_map(t_data *data, t_map *map);
-t_point				project_iso(int x, int y, int z, float scale, t_data *data);
+t_point				project_iso(int x, int y, int z, t_data *data);
 int					key_hook(int keycode, t_data *data);
 int					calculate_color(int z, int min_z, int max_z);
 void				put_pixel(t_data *data, int x, int y, int color);
@@ -97,8 +97,7 @@ int					*parse_line_with_minmax(char *line, int *width, t_map *map);
 void				grid_alloc_with_minmax(t_map *map, const char *maps,
 						int height);
 void				draw_line(t_data *data, t_point p1, t_point p2);
-void				draw_map_line(t_data *data, t_map *map, int x, int y,
-						float scale);
+void				draw_map_line(t_data *data, t_map *map, int x, int y);
 void				initialize_line(t_line *line, t_point p1, t_point p2);
 void				update_line_position(t_line *line, t_point *p1);
 void				free_split(char **split);
