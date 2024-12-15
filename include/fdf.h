@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 12:17:35 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 14:33:23 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define WinWidth 1500
 # define ZOOM_IN 4
 # define ZOOM_OUT 5
+# define CLICK 1
+# define RIGHT_CLICK 3
 # define UP 65362
 # define DOWN 65364
 # define LEFT 65361
@@ -53,6 +55,7 @@ typedef struct s_data
 	float			angle;
 	int				cam_x;
 	int				cam_y;
+	float			deep;
 }					t_data;
 
 typedef struct s_map
@@ -103,4 +106,6 @@ float				calculate_scale(t_map *map, int width, int height);
 int					mouse_hook(int button, int x, int y, t_data *data);
 void				free_map(t_map *map);
 int					key_mouv(int keycode, t_data *data);
+int					error_handler(int error_code, char *message);
+int					initialize_data(t_data *data, t_map *map);
 #endif

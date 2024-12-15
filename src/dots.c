@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:42:14 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 12:31:22 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 15:47:21 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_point	project_iso(int x, int y, int z, float scale, t_data *data)
 	t_point	p;
 
 	p.x = (x - y) * cos(data->angle) * scale;
-	p.y = (x + y) * sin(data->angle) * scale - z * 0.280 * scale;
+	p.y = (x + y) * sin(data->angle) * scale - z * data->deep * scale;
 	p.x += WinWidth / 2 + data->cam_x;
 	p.y += WinHeight / 2 + data->cam_y;
 	return (p);

@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:47:09 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 12:31:59 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 14:16:31 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ int	mouse_hook(int button, int x, int y, t_data *data)
 {
 	(void)y;
 	(void)x;
+	if (button == CLICK)
+		data->deep *= 1.2;
+	else if (button == RIGHT_CLICK)
+		data->deep *= 0.7;
 	if (button == ZOOM_IN)
 		data->scale *= 1.1;
 	else if (button == ZOOM_OUT)

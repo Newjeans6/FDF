@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:19:00 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 12:30:27 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 13:32:34 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	draw_map(t_data *data, t_map *map)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 50, 50);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
 }
 
 void	draw_map_line(t_data *data, t_map *map, int x, int y, float scale)
