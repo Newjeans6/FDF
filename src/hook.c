@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:47:09 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 16:42:37 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 16:56:11 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	mouse_hook(int button, int x, int y, t_data *data)
 	else if (button == ZOOM_OUT)
 		data->scale /= 1.1;
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	ft_memset(data->addr, 0, WinWidth * WinHeight * (data->bits_per_pixel / 8));
+	ft_memset(data->addr, 0, WIN_WIDTH * WIN_HEIGHT * (data->bits_per_pixel
+			/ 8));
 	draw_map(data, data->map);
 	return (0);
 }
@@ -47,9 +48,9 @@ int	key_hook(int keycode, t_data *data)
 		if (keycode == A)
 			data->angle = 0;
 		if (keycode == D)
-			data->angle = Angle;
+			data->angle = ANGLE;
 		mlx_clear_window(data->mlx_ptr, data->win_ptr);
-		ft_memset(data->addr, 0, WinWidth * WinHeight * (data->bits_per_pixel
+		ft_memset(data->addr, 0, WIN_WIDTH * WIN_HEIGHT * (data->bits_per_pixel
 				/ 8));
 		draw_map(data, data->map);
 		return (0);
@@ -68,7 +69,8 @@ int	key_mouv(int keycode, t_data *data)
 	if (keycode == RIGHT)
 		data->cam_x -= 50;
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	ft_memset(data->addr, 0, WinWidth * WinHeight * (data->bits_per_pixel / 8));
+	ft_memset(data->addr, 0, WIN_WIDTH * WIN_HEIGHT * (data->bits_per_pixel
+			/ 8));
 	draw_map(data, data->map);
 	return (0);
 }

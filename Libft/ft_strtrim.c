@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 14:19:30 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/11/20 13:29:12 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 16:52:28 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,4 @@ char	*ft_strtrim(char const *s1, char const *set)
 		end--;
 	trimmed = ft_substr(s1, start, end - start + 1);
 	return (trimmed);
-}
-int main(void)
-{
-	char	*str = "    xxx xx  xx";
-	char	*set = NULL;
-	char	*trimmed = ft_strtrim(str, set);
-	printf("%s\n", trimmed);
-	free(trimmed);
-	return (0);
 }

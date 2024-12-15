@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 16:48:49 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 16:53:43 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # define A 97
 # define D 100
 # define DESTROY 17
-# define KeyPress 02
-# define Angle 0.523599
-# define WinHeight 1500
-# define WinWidth 1500
+# define KEY_PRESS 02
+# define ANGLE 0.523599
+# define WIN_HEIGHT 1500
+# define WIN_WIDTH 1500
 # define ZOOM_IN 4
 # define ZOOM_OUT 5
 # define CLICK 1

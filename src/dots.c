@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:42:14 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 16:46:30 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 16:54:07 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ float	calculate_scale(t_map *map, int width, int height)
 	float	scale_x;
 	float	scale_y;
 
-	map_width = (map->width + map->height) * cos(Angle);
-	map_height = (map->width + map->height) * sin(Angle) / 2;
+	map_width = (map->width + map->height) * cos(ANGLE);
+	map_height = (map->width + map->height) * sin(ANGLE) / 2;
 	scale_x = width / map_width;
 	scale_y = height / map_height;
 	return ((fmin(scale_x, scale_y) * 0.7));
@@ -33,8 +33,8 @@ t_point	project_iso(int x, int y, int z, t_data *data)
 	p.x = (x - y) * cos(data->angle) * data->scale;
 	p.y = (x + y) * sin(data->angle) * data->scale - z * data->deep
 		* data->scale;
-	p.x += WinWidth / 2 + data->cam_x;
-	p.y += WinHeight / 2 + data->cam_y;
+	p.x += WIN_WIDTH / 2 + data->cam_x;
+	p.y += WIN_HEIGHT / 2 + data->cam_y;
 	return (p);
 }
 

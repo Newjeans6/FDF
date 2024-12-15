@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:19:00 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 16:49:23 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 16:55:46 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	draw_map(t_data *data, t_map *map)
 
 	if (data->flag == 1)
 	{
-		data->scale = calculate_scale(map, WinWidth, WinHeight);
+		data->scale = calculate_scale(map, WIN_WIDTH, WIN_HEIGHT);
 		data->flag = 0;
 	}
 	y = 0;
@@ -64,7 +64,7 @@ void	draw_line(t_data *data, t_point p1, t_point p2)
 	initialize_line(&line, p1, p2);
 	while (1)
 	{
-		if (p1.x >= 0 && p1.x < WinWidth && p1.y >= 0 && p1.y < WinHeight)
+		if (p1.x >= 0 && p1.x < WIN_HEIGHT && p1.y >= 0 && p1.y < WIN_HEIGHT)
 		{
 			put_pixel(data, p1.x, p1.y, p1.color);
 		}
@@ -72,7 +72,7 @@ void	draw_line(t_data *data, t_point p1, t_point p2)
 			if ((line.sy > 0 && p1.y >= p2.y) || (line.sy < 0 && p1.y <= p2.y))
 				break ;
 		update_line_position(&line, &p1);
-		if (p1.x < 0 || p1.x >= WinWidth || p1.y < 0 || p1.y >= WinHeight)
+		if (p1.x < 0 || p1.x >= WIN_HEIGHT || p1.y < 0 || p1.y >= WIN_HEIGHT)
 			break ;
 	}
 }
@@ -81,7 +81,7 @@ void	put_pixel(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x >= 0 && x < WinWidth && y >= 0 && y < WinHeight && data->addr)
+	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT && data->addr)
 	{
 		dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel
 					/ 8));

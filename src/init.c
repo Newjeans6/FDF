@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:30:13 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 16:07:22 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 16:55:04 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int	close_window(t_data *data)
 int	initialize_data(t_data *data, t_map *map)
 {
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WinWidth, WinHeight, "FDF");
-	data->img = mlx_new_image(data->mlx_ptr, WinWidth, WinHeight);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FDF");
+	data->img = mlx_new_image(data->mlx_ptr, WIN_HEIGHT, WIN_HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endian);
 	data->scale = 1.0;
 	data->map = map;
-	data->angle = Angle;
+	data->angle = ANGLE;
 	data->cam_x = 0;
 	data->cam_y = 0;
 	data->deep = 0.285;

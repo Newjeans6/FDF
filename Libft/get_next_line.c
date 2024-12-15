@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:47:55 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/12/09 15:48:29 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 16:52:59 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static char	*strdup(const char *s)
 	str[i] = '\0';
 	return (str);
 }
+
 static char	*strjoin(char *s1, char *s2)
 {
 	size_t	len1;
@@ -58,6 +59,7 @@ static char	*strjoin(char *s1, char *s2)
 	free(s1);
 	return (str);
 }
+
 static void	ft_update(char *str)
 {
 	int	i;
