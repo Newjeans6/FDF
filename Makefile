@@ -6,7 +6,7 @@
 #    By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:42:01 by pnaessen          #+#    #+#              #
-#    Updated: 2024/12/13 14:00:15 by pnaessen         ###   ########lyon.fr    #
+#    Updated: 2024/12/15 11:50:21 by pnaessen         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC := gcc
 CCFLAGS := -Wextra -Wall -Werror -g3
 SRC_DIR := src/
 INCLUDES:= include/
-SRC := $(addprefix $(SRC_DIR), main.c parse.c algo.c dots.c line.c)
+SRC := $(addprefix $(SRC_DIR), main.c parse.c algo.c dots.c line.c hook.c)
 
 OBJ_DIR := .obj/
 OBJ := $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)

@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:30:13 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/14 14:18:53 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 12:43:59 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,9 @@ void	free_map(t_map *map)
 	}
 }
 
-int	key_hook(int keycode, t_data *data)
-{
-	if (keycode == ESC_KEY)
-	{
-		mlx_destroy_image(data->mlx_ptr, data->img);
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
-		exit(0);
-	}
-	printf("keycode = %d\n", keycode);
-	return (0);
-}
-int	mouse_hook(int button, int x, int y, t_data *data)
-{
-	(void)y;
-	(void)x;
-	if (button == ZOOM_IN)
-		data->scale *= 1.1;
-	else if (button == ZOOM_OUT)
-		data->scale /= 1.1;
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	ft_memset(data->addr, 0, WinWidth * WinHeight * (data->bits_per_pixel / 8));
-	draw_map(data, data->map);
-	return (0);
-}
 int	close_window(t_data *data)
 {
+	free_map(data->map);
 	mlx_destroy_image(data->mlx_ptr, data->img);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
@@ -67,6 +42,7 @@ int	close_window(t_data *data)
 	exit(0);
 	return (0);
 }
+
 
 int	main(int argc, char **argv)
 {
@@ -88,15 +64,16 @@ int	main(int argc, char **argv)
 	data.map = map;
 	if (data.map)
 	{
+		data.angle = Angle;
+		data.cam_x = 0;
+		data.cam_y = 0;
 		data.flag = 1;
 		draw_map(&data, map);
 	}
-	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img, 0, 0);
 	mlx_key_hook(data.win_ptr, key_hook, &data);
 	mlx_mouse_hook(data.win_ptr, (int (*)(int, int, int, void *))mouse_hook,
 		&data);
 	mlx_hook(data.win_ptr, DESTROY, 0, close_window, &data);
-	free_map(map);
 	mlx_loop(data.mlx_ptr);
 	return (0);
 }

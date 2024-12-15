@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/14 13:22:04 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/15 12:17:35 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 # define MLX_ERROR 1
 # define ESC_KEY 65307
+# define A 97
+# define D 100
 # define DESTROY 17
 # define KeyPress 02
 # define Angle 0.523599
@@ -31,6 +33,10 @@
 # define WinWidth 1500
 # define ZOOM_IN 4
 # define ZOOM_OUT 5
+# define UP 65362
+# define DOWN 65364
+# define LEFT 65361
+# define RIGHT 65363
 
 typedef struct s_data
 {
@@ -44,6 +50,9 @@ typedef struct s_data
 	float			scale;
 	int				flag;
 	struct s_map	*map;
+	float			angle;
+	int				cam_x;
+	int				cam_y;
 }					t_data;
 
 typedef struct s_map
@@ -76,7 +85,7 @@ typedef struct s_line
 int					close_window(t_data *data);
 t_map				*read_map(const char *maps);
 void				draw_map(t_data *data, t_map *map);
-t_point				project_iso(int x, int y, int z, float scale);
+t_point				project_iso(int x, int y, int z, float scale, t_data *data);
 int					key_hook(int keycode, t_data *data);
 int					calculate_color(int z, int min_z, int max_z);
 void				put_pixel(t_data *data, int x, int y, int color);
@@ -91,4 +100,7 @@ void				initialize_line(t_line *line, t_point p1, t_point p2);
 void				update_line_position(t_line *line, t_point *p1);
 void				free_split(char **split);
 float				calculate_scale(t_map *map, int width, int height);
+int					mouse_hook(int button, int x, int y, t_data *data);
+void				free_map(t_map *map);
+int					key_mouv(int keycode, t_data *data);
 #endif
