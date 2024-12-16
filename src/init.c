@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:30:13 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 16:55:04 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/16 17:24:40 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,44 @@ void	free_map(t_map *map)
 		free(map);
 	}
 }
-
-int	close_window(t_data *data)
+int	validate_file(const char *filename)
 {
-	free_map(data->map);
-	mlx_destroy_image(data->mlx_ptr, data->img);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	exit(0);
+	const char	*extension = ".fdf";
+	size_t		ext_len;
+	size_t		len;
+	FILE		*file;
+
+	ext_len = ft_strlen(extension);
+	len = ft_strlen(filename);
+	if (len < ext_len || ft_strncmp(filename + len - ext_len, extension,
+			ext_len) != 0)
+	{
+		return (error_handler(2, "File must have a .fdf extension"));
+	}
+	file = fopen(filename, "r");
+	if (!file)
+		return (error_handler(2, "File does not exist or cannot be accessed"));
+	fclose(file);
 	return (0);
 }
 
-int	initialize_data(t_data *data, t_map *map)
+t_data	initialize_data(t_map *map)
 {
-	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FDF");
-	data->img = mlx_new_image(data->mlx_ptr, WIN_HEIGHT, WIN_HEIGHT);
-	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
-			&data->line_length, &data->endian);
-	data->scale = 1.0;
-	data->map = map;
-	data->angle = ANGLE;
-	data->cam_x = 0;
-	data->cam_y = 0;
-	data->deep = 0.285;
-	data->flag = 1;
-	return (data->mlx_ptr && data->win_ptr && data->img && data->addr);
+	t_data	data;
+
+	data.mlx_ptr = mlx_init();
+	data.win_ptr = mlx_new_window(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FDF");
+	data.img = mlx_new_image(data.mlx_ptr, WIN_HEIGHT, WIN_HEIGHT);
+	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
+			&data.line_length, &data.endian);
+	data.scale = 1.0;
+	data.map = map;
+	data.angle = ANGLE;
+	data.cam_x = 0;
+	data.cam_y = 0;
+	data.deep = 0.285;
+	data.flag = 1;
+	return (data);
 }
 
 int	main(int argc, char **argv)
@@ -67,10 +78,13 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (error_handler(1, "Usage: ./fdf map_file"));
+	if (validate_file(argv[1]) != 0)
+		return (2);
 	map = read_map(argv[1]);
 	if (!map)
 		return (error_handler(2, "Failed to read map"));
-	if (!initialize_data(&data, map))
+	data = initialize_data(map);
+	if (!data.mlx_ptr || !data.win_ptr || !data.img || !data.addr)
 		return (error_handler(3, "Failed to initialize data"));
 	draw_map(&data, map);
 	mlx_key_hook(data.win_ptr, key_hook, &data);

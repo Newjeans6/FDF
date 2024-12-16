@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 11:47:09 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 16:56:11 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/16 17:05:37 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ int	mouse_hook(int button, int x, int y, t_data *data)
 		data->scale *= 1.1;
 	else if (button == ZOOM_OUT)
 		data->scale /= 1.1;
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	ft_memset(data->addr, 0, WIN_WIDTH * WIN_HEIGHT * (data->bits_per_pixel
-			/ 8));
+	ft_memset(data->addr, 0, (data->line_length * WIN_HEIGHT));
 	draw_map(data, data->map);
 	return (0);
 }
@@ -49,9 +47,7 @@ int	key_hook(int keycode, t_data *data)
 			data->angle = 0;
 		if (keycode == D)
 			data->angle = ANGLE;
-		mlx_clear_window(data->mlx_ptr, data->win_ptr);
-		ft_memset(data->addr, 0, WIN_WIDTH * WIN_HEIGHT * (data->bits_per_pixel
-				/ 8));
+		ft_memset(data->addr, 0, (data->line_length * WIN_HEIGHT));
 		draw_map(data, data->map);
 		return (0);
 	}
@@ -68,9 +64,18 @@ int	key_mouv(int keycode, t_data *data)
 		data->cam_x += 50;
 	if (keycode == RIGHT)
 		data->cam_x -= 50;
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	ft_memset(data->addr, 0, WIN_WIDTH * WIN_HEIGHT * (data->bits_per_pixel
-			/ 8));
+	ft_memset(data->addr, 0, (data->line_length * WIN_HEIGHT));
 	draw_map(data, data->map);
+	return (0);
+}
+
+int	close_window(t_data *data)
+{
+	free_map(data->map);
+	mlx_destroy_image(data->mlx_ptr, data->img);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
+	exit(0);
 	return (0);
 }

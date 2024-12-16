@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/15 16:53:43 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/16 17:25:44 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define DESTROY 17
 # define KEY_PRESS 02
 # define ANGLE 0.523599
-# define WIN_HEIGHT 1500
-# define WIN_WIDTH 1500
+# define WIN_HEIGHT 2000
+# define WIN_WIDTH 2000
 # define ZOOM_IN 4
 # define ZOOM_OUT 5
 # define CLICK 1
@@ -106,5 +106,6 @@ int					mouse_hook(int button, int x, int y, t_data *data);
 void				free_map(t_map *map);
 int					key_mouv(int keycode, t_data *data);
 int					error_handler(int error_code, char *message);
-int					initialize_data(t_data *data, t_map *map);
+t_data				initialize_data(t_map *map);
+int					validate_file(const char *filename);
 #endif
