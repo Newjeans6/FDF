@@ -3,6 +3,8 @@
 		"mlx.h": "c",
 		"fdf.h": "c",
 		"libft.h": "c",
-		"cmath": "cpp"
+		"cmath": "cpp",
+		"fcntl.h": "c",
+		"unistd.h": "c"
 	}
 }
