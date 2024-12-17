@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:30:13 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/16 17:24:40 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/17 17:49:48 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	free_map(t_map *map)
 		free(map);
 	}
 }
-int	validate_file(const char *filename)
+
+int	validate_file(const char *fd)
 {
 	const char	*extension = ".fdf";
 	size_t		ext_len;
@@ -39,13 +40,13 @@ int	validate_file(const char *filename)
 	FILE		*file;
 
 	ext_len = ft_strlen(extension);
-	len = ft_strlen(filename);
-	if (len < ext_len || ft_strncmp(filename + len - ext_len, extension,
+	len = ft_strlen(fd);
+	if (len < ext_len || ft_strncmp(fd + len - ext_len, extension,
 			ext_len) != 0)
 	{
 		return (error_handler(2, "File must have a .fdf extension"));
 	}
-	file = fopen(filename, "r");
+	file = fopen(fd, "r");
 	if (!file)
 		return (error_handler(2, "File does not exist or cannot be accessed"));
 	fclose(file);
@@ -82,6 +83,8 @@ int	main(int argc, char **argv)
 		return (2);
 	map = read_map(argv[1]);
 	if (!map)
+		return (error_handler(2, "Failed to read map"));
+	if (map->width == 0)
 		return (error_handler(2, "Failed to read map"));
 	data = initialize_data(map);
 	if (!data.mlx_ptr || !data.win_ptr || !data.img || !data.addr)
