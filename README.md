@@ -80,7 +80,9 @@ https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 
 ## Acknowledgments
 
-A great thanks to Cdomet-D/Aljulien/Lbuisson/Vgarcia for feedback and ideas were super helpful testing everything and catching those bugs!
+A great thanks to Cdomet-D/Aljulien/Lbuisson/Vgarcia for feedback and ideas were super helpful testing everything and catching those bugs! and for a insane makefile.
+
+AND A huge shoutout to the awesome vicperri who helped make this project happen:
 
 
 
