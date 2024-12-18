@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 21:26:34 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/12/17 13:41:48 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/18 12:44:44 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_map	*read_map(const char *maps)
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
+	map->width = 0;
 	height = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
@@ -47,8 +48,7 @@ t_map	*read_map(const char *maps)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	grid_alloc_with_minmax(map, maps, height);
-	if (!map->grid)
+	if (grid_alloc_with_minmax(map, maps, height) != 0)
 		return (NULL);
 	return (map);
 }
@@ -93,7 +93,7 @@ int	*parse_line_with_minmax(char *line, int *width, t_map *map)
 	return (row);
 }
 
-void	grid_alloc_with_minmax(t_map *map, const char *maps, int height)
+int	grid_alloc_with_minmax(t_map *map, const char *maps, int height)
 {
 	char	*line;
 	int		fd;
@@ -101,17 +101,14 @@ void	grid_alloc_with_minmax(t_map *map, const char *maps, int height)
 
 	map->grid = malloc(sizeof(int *) * height);
 	if (!map->grid)
-	{
-		free(map);
-		return ;
-	}
+		return (free(map), -1);
 	map->height = height;
 	fd = open(maps, O_RDONLY);
 	if (fd < 0)
-		return ;
+		return (free(map->grid), -1);
 	map->min_z = INT_MAX;
 	map->max_z = INT_MIN;
-	y = 0 - 1;
+	y = -1;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -120,4 +117,5 @@ void	grid_alloc_with_minmax(t_map *map, const char *maps, int height)
 		line = get_next_line(fd);
 	}
 	close(fd);
+	return (0);
 }

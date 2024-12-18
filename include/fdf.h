@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/17 18:04:15 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/18 12:42:08 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int					calculate_color(int z, int min_z, int max_z);
 void				put_pixel(t_data *data, int x, int y, int color);
 void				update_min_max(t_map *map, int z);
 int					*parse_line_with_minmax(char *line, int *width, t_map *map);
-void				grid_alloc_with_minmax(t_map *map, const char *maps,
+int					grid_alloc_with_minmax(t_map *map, const char *maps,
 						int height);
 void				draw_line(t_data *data, t_point p1, t_point p2);
 void				draw_map_line(t_data *data, t_map *map, int x, int y);

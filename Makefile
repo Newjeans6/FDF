@@ -6,7 +6,7 @@
 #    By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 10:42:01 by pnaessen          #+#    #+#              #
-#    Updated: 2024/12/16 16:58:16 by pnaessen         ###   ########lyon.fr    #
+#    Updated: 2024/12/18 10:37:48 by pnaessen         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ:= $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 DEPS:= $(OBJ:%.o=%.d)
 
 CC:= gcc
-CCFLAGS:= -Wextra -Wall -Werror 
+CCFLAGS:= -Wextra -Wall -Werror
 CPPFLAGS = -MMD -MP
 SRC_DIR:= src/
 INCLUDES:= include/

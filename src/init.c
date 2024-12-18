@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:30:13 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/17 18:08:13 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/18 12:40:19 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,26 @@ void	free_map(t_map *map)
 	}
 }
 
-#include <fcntl.h>
-#include <unistd.h>
-
-int validate_file(const char *fd)
+int	validate_file(const char *fd)
 {
-    const char *extension = ".fdf";
-    size_t ext_len;
-    size_t len;
-    int file_descriptor;
+	const char	*extension = ".fdf";
+	size_t		ext_len;
+	size_t		len;
+	int			file_descriptor;
 
-    ext_len = ft_strlen(extension);
-    len = ft_strlen(fd);
-    if (len < ext_len || ft_strncmp(fd + len - ext_len, extension, ext_len) != 0)
-    {
-        return (error_handler(2, "File must have a .fdf extension"));
-    }
-    file_descriptor = open(fd, O_RDONLY);
-    if (file_descriptor == -1)
-        return (error_handler(2, "File does not exist or cannot be accessed"));
-    close(file_descriptor);
-    return (0);
+	ext_len = ft_strlen(extension);
+	len = ft_strlen(fd);
+	if (len < ext_len || ft_strncmp(fd + len - ext_len, extension,
+			ext_len) != 0)
+	{
+		return (error_handler(2, "File must have a .fdf extension"));
+	}
+	file_descriptor = open(fd, O_RDONLY);
+	if (file_descriptor == -1)
+		return (error_handler(2, "File does not exist or cannot be accessed"));
+	close(file_descriptor);
+	return (0);
 }
-
 
 t_data	initialize_data(t_map *map)
 {
@@ -88,7 +85,8 @@ int	main(int argc, char **argv)
 	if (!map)
 		return (error_handler(2, "Failed to read map"));
 	if (map->width == 0)
-		return (error_handler(2, "Failed to read map"));
+		return (free(map->grid), free(map), error_handler(2,
+				"Failed to read map"));
 	data = initialize_data(map);
 	if (!data.mlx_ptr || !data.win_ptr || !data.img || !data.addr)
 		return (error_handler(3, "Failed to initialize data"));
