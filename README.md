@@ -54,7 +54,7 @@ Once the executable is created, you can run it:
 You can test any file; I've secured my code, so you can't break it.
 
 ### Troubleshooting
-No bugs too good, sorry.
+No bugs too good, sorry. And in any case, Ostrich algorithm.
 
 ### Interaction
 Once the program is running, you can interact with the 3D map using the following controls:
@@ -94,7 +94,7 @@ Once the program is running, you can interact with the 3D map using the followin
 - [Bresenham's Line Algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)
 
 ### Acknowledgments
-A huge thanks to Cdomet-D, Aljulien, Lbuisson, and Vgarcia for their feedback and ideas—they were super helpful in testing everything and catching those bugs! Also, a big shoutout to the awesome **vicperri** who helped make this project happen.
+A huge thanks to Cdomet-D, Aljulien, Lbuisson, and Vgarcia for their feedback and ideas—they were super helpful in testing everything and catching those bugs as well as for the makefile! ! Also, a big shoutout to the awesome **vicperri** who helped make this project happen.
 
 ---
 
