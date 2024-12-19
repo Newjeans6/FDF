@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:30:13 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/18 12:40:19 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/19 12:13:50 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,20 @@ t_data	initialize_data(t_map *map)
 {
 	t_data	data;
 
+	data.img = NULL;
 	data.mlx_ptr = mlx_init();
+	if (!data.mlx_ptr)
+		return (free_map(map), data);
 	data.win_ptr = mlx_new_window(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FDF");
+	if (!data.win_ptr)
+		return (cleanup_data(&data, map), data);
 	data.img = mlx_new_image(data.mlx_ptr, WIN_HEIGHT, WIN_HEIGHT);
+	if (!data.img)
+		return (cleanup_data(&data, map), data);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 			&data.line_length, &data.endian);
+	if (!data.addr)
+		return (cleanup_data(&data, map), data);
 	data.scale = 1.0;
 	data.map = map;
 	data.angle = ANGLE;

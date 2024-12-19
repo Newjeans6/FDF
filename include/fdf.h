@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:48:31 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/12/18 12:42:08 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/12/19 11:53:31 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,5 @@ int					key_mouv(int keycode, t_data *data);
 int					error_handler(int error_code, char *message);
 t_data				initialize_data(t_map *map);
 int					validate_file(const char *filename);
+void				cleanup_data(t_data *data, t_map *map);
 #endif
